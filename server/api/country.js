@@ -10,6 +10,16 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:countryId", async (req, res, next) => {
+  try {
+    const id = req.params.countryId;
+    const country = await Country.findByPk(id);
+    res.json(country);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.use((req, res, next) => {
   const err = new Error("API route not found!");
   err.status = 404;

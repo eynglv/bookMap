@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/index.js",
-    "start-dev": "npx nodemon server/index.js",
+    "start": "node main.js",
+    "start-dev": "npx nodemon main.js",
     "build": "webpack --config webpack.config.js -w"
   },
   "author": "elvy",
