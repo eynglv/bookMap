@@ -1,5 +1,5 @@
 let width = 1000;
-let height = 1000;
+let height = 800;
 
 const svg = d3
   .select("#my_bookmap")
@@ -8,7 +8,7 @@ const svg = d3
 
 let projection = d3
   .geoEquirectangular()
-  .center([75, 10])
+  .center([75, 15])
   .scale(500)
   .translate([width / 2, height / 2]);
 //projection function takes [longitude, latitude] & outputs [x,y]
@@ -30,4 +30,20 @@ const geoJson = d3.json("custom.geo.json", (error, data) => {
       return `mapColor${dataFeatures[index].properties.mapcolor9}`;
     })
     .attr("d", geoGenerator);
+
+  index = -1;
+
+  svg
+    .selectAll(".countryLabel")
+    .data(dataFeatures)
+    .enter()
+    .append("text")
+    .attr("class", "countryLabel")
+    .attr("transform", function (d) {
+      return "translate(" + geoGenerator.centroid(d) + ")";
+    })
+    .text(() => {
+      index++;
+      return dataFeatures[index].properties.name;
+    });
 });
