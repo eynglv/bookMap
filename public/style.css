@@ -56,4 +56,5 @@
 
 .active {
   fill: #ffd60a;
+  cursor: pointer;
 }

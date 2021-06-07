@@ -1,4 +1,4 @@
-let width = 1000;
+let width = 1300;
 let height = 800;
 
 const svg = d3
@@ -8,7 +8,7 @@ const svg = d3
 
 let projection = d3
   .geoEquirectangular()
-  .center([75, 15])
+  .center([85, 15])
   .scale(500)
   .translate([width / 2, height / 2]);
 //projection function takes [longitude, latitude] & outputs [x,y]
@@ -33,7 +33,8 @@ const geoJson = d3.json("custom.geo.json", (error, data) => {
     })
     .on("mouseout", function (data) {
       d3.select(this).classed("active", false);
-    });
+    })
+    .on("click", getData);
 
   svg
     .selectAll(".countryLabel")
@@ -49,3 +50,15 @@ const geoJson = d3.json("custom.geo.json", (error, data) => {
       return data.properties.name;
     });
 });
+
+function getData(data) {
+  console.log(data);
+  // d3.request("").get(
+  //   data,
+  //   () => {
+  //     console.log("dATA", data);
+  //   }
+  // );
+  //furrrrkkkkkk
+  //axios get request with name in headers? questionable
+}

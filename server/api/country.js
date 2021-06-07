@@ -4,6 +4,7 @@ const { Country } = require("../db/index");
 router.get("/", async (req, res, next) => {
   try {
     const countries = await Country.findAll();
+    console.log("how about here");
     res.json(countries);
   } catch (err) {
     next(err);
