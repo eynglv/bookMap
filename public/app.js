@@ -28,8 +28,11 @@ const geoJson = d3.json("custom.geo.json", (error, data) => {
       return `mapColor${data.properties.mapcolor9}`;
     })
     .attr("d", geoGenerator)
-    .on("click", (data) => {
-      console.log(data);
+    .on("mouseover", function (data) {
+      d3.select(this).classed("active", true);
+    })
+    .on("mouseout", function (data) {
+      d3.select(this).classed("active", false);
     });
 
   svg
@@ -39,8 +42,8 @@ const geoJson = d3.json("custom.geo.json", (error, data) => {
     .append("text")
     .attr("class", "countryLabel")
     // .attr("dy", ".35em") dunno what this does
-    .attr("transform", function (d) {
-      return "translate(" + geoGenerator.centroid(d) + ")";
+    .attr("transform", (data) => {
+      return "translate(" + geoGenerator.centroid(data) + ")";
     })
     .text((data) => {
       return data.properties.name;

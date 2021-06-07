@@ -53,3 +53,7 @@
   font-weight: 100;
   text-anchor: middle;
 }
+
+.active {
+  fill: #ffd60a;
+}
