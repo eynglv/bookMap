@@ -19,19 +19,18 @@ let geoGenerator = d3.geoPath().projection(projection);
 const geoJson = d3.json("custom.geo.json", (error, data) => {
   if (error) console.error(error);
   const dataFeatures = data.features;
-  let index = -1;
   svg
     .selectAll("path")
     .data(dataFeatures)
     .enter()
     .append("path")
-    .attr("class", () => {
-      index++;
-      return `mapColor${dataFeatures[index].properties.mapcolor9}`;
+    .attr("class", (data) => {
+      return `mapColor${data.properties.mapcolor9}`;
     })
-    .attr("d", geoGenerator);
-
-  index = -1;
+    .attr("d", geoGenerator)
+    .on("click", (data) => {
+      console.log(data);
+    });
 
   svg
     .selectAll(".countryLabel")
@@ -39,11 +38,11 @@ const geoJson = d3.json("custom.geo.json", (error, data) => {
     .enter()
     .append("text")
     .attr("class", "countryLabel")
+    // .attr("dy", ".35em") dunno what this does
     .attr("transform", function (d) {
       return "translate(" + geoGenerator.centroid(d) + ")";
     })
-    .text(() => {
-      index++;
-      return dataFeatures[index].properties.name;
+    .text((data) => {
+      return data.properties.name;
     });
 });
